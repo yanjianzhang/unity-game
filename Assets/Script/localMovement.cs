@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
+
 public class localMovement : MonoBehaviour
 {
     private CharacterController controller;
@@ -29,6 +30,9 @@ public class localMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // log character name to console
+        print("name:" + this.name);
+
         MoveLikeWoW();
 
     }
@@ -51,13 +55,18 @@ public class localMovement : MonoBehaviour
     }
 
 
+
     private void MoveLikeUnity()
+    // following the mouse to change the direction of the character
     {
 
         GravityDrivenMove();
 
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+
+        float horizontal = Utils.GetHorizontal(this.name);
+        float vertical = Utils.GetVertical(this.name);
+
+
         var move = new Vector3(horizontal, 0, vertical).normalized;
         controller.Move(move * Speed * Time.deltaTime);
         // if move is not zero, play run animation
@@ -103,10 +112,14 @@ public class localMovement : MonoBehaviour
     {
         GravityDrivenMove();
 
+
         // print Vector3.forward, Vector3.right, Vector3.up to console
         print("Vector3.forward: " + Vector3.forward + " Vector3.right: " + Vector3.right + " Vector3.up: " + Vector3.up);
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+
+
+        float horizontal = Utils.GetHorizontal(this.name);
+        float vertical = Utils.GetVertical(this.name);
+
         // print height and radius of controller to console
         print("controller.height: " + controller.height + " controller.radius: " + controller.radius);
         // print position of the character to console

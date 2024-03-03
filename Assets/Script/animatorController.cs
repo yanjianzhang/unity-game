@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class animatorController : MonoBehaviour
 {
     private Animator animator;
@@ -14,8 +13,10 @@ public class animatorController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        // float horizontal = Input.GetAxis("Horizontal");
+        // float vertical = Input.GetAxis("Vertical");
+        float horizontal = Utils.GetHorizontal(this.name);
+        float vertical = Utils.GetVertical(this.name);
         if (horizontal != 0 || vertical != 0)
         {
             animator.SetBool("IsRun", true);
@@ -26,7 +27,7 @@ public class animatorController : MonoBehaviour
         }
 
         // if click left mouse button, triger TriggerAttack
-        if (Input.GetMouseButtonDown(0))
+        if (Utils.GetTriggerAttack(this.name))
         {
             animator.SetTrigger("TriggerAttack");
         }
