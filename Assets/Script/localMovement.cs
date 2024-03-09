@@ -30,8 +30,6 @@ public class localMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // log character name to console
-        print("name:" + this.name);
 
         MoveLikeWoW();
 
@@ -40,8 +38,7 @@ public class localMovement : MonoBehaviour
     private void GravityDrivenMove()
     {
         // add gravity
-        // print GroundCheck.position, CheckRadius, layerMask to console
-        print("GroundCheck.position: " + GroundCheck.position + " CheckRadius: " + CheckRadius + " layerMask: " + layerMask);
+
         IsGround = Physics.CheckSphere(GroundCheck.position, CheckRadius, layerMask);
         if (IsGround && Velocity.y < 0)
         {
@@ -87,9 +84,6 @@ public class localMovement : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, angle, 0);
 
 
-
-        // print IsGround to console
-        print("IsGround: " + IsGround);
         // press space to jump
         if (Input.GetKeyDown(KeyCode.Space) && IsGround)
         {
@@ -113,20 +107,12 @@ public class localMovement : MonoBehaviour
         GravityDrivenMove();
 
 
-        // print Vector3.forward, Vector3.right, Vector3.up to console
-        print("Vector3.forward: " + Vector3.forward + " Vector3.right: " + Vector3.right + " Vector3.up: " + Vector3.up);
-
 
         float horizontal = Utils.GetHorizontal(this.name);
         float vertical = Utils.GetVertical(this.name);
 
-        // print height and radius of controller to console
-        print("controller.height: " + controller.height + " controller.radius: " + controller.radius);
-        // print position of the character to console
-        print("character position: " + transform.position);
         var move = transform.forward * Speed * vertical * Time.deltaTime;
-        // print move to console
-        print("move: " + move);
+
         controller.Move(move);
 
         IsGround = Physics.CheckSphere(GroundCheck.position, CheckRadius, layerMask);
